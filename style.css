@@ -1,0 +1,51 @@
+body {
+    margin: 0; background: #1a1a1a;
+    font-family: -apple-system, sans-serif;
+    height: 100vh; overflow: hidden;
+    display: flex; flex-direction: column;
+    touch-action: none;
+}
+
+#controls {
+    background: #000; padding: 10px;
+    display: flex; justify-content: center;
+    gap: 6px; z-index: 1000;
+    border-bottom: 1px solid #333; flex-wrap: wrap;
+}
+
+.btn, select {
+    padding: 8px 10px; border-radius: 6px;
+    background: #2a2a2a; color: white;
+    border: 1px solid #444; font-size: 13px; cursor: pointer;
+}
+
+#field {
+    position: relative; flex-grow: 1;
+    /* SWAP IMAGE HERE: Ensure your photo is named field-bg.jpg in GitHub */
+    background-image: url('field-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+#drawLayer {
+    position: absolute; top: 0; left: 0;
+    z-index: 10; width: 100%; height: 100%;
+}
+
+.piece {
+    position: absolute; width: 34px; height: 34px;
+    border-radius: 50%; display: flex;
+    align-items: center; justify-content: center;
+    font-weight: bold; color: white;
+    z-index: 50; touch-action: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    user-select: none; border: 2px solid rgba(255,255,255,0.3);
+    transition: left 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+        top 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.red { background: #e63946; }
+.blue { background: #0077b6; }
+.ball { width: 22px; height: 22px; background: #fff; border: 2px solid #222; z-index: 60; border-radius: 50%; color: transparent; }

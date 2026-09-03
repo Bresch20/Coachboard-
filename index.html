@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>GafferBoard Pro</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="controls">
+<select id="formationSelect" onchange="handleFormationChange()">
+<option value="">Select Formation</option>
+<optgroup label="11 v 11">
+<option value="4-3-3">4-3-3</option>
+<option value="4-4-2-flat">4-4-2 (Flat)</option>
+<option value="3-5-2">3-5-2</option>
+</optgroup>
+<optgroup label="9 v 9">
+<option value="3-2-3">3-2-3</option>
+<option value="3-4-1-flat">3-4-1 (Flat)</option>
+</optgroup>
+<optgroup label="6 v 6">
+<option value="2-2-1">2-2-1</option>
+<option value="2-3-1">2-3-1</option>
+</optgroup>
+<optgroup label="My Saved Plays" id="customGroup"></optgroup>
+</select>
+
+<button class="btn" onclick="togglePhase()">Atk/Def</button>
+<button class="btn" onclick="saveCustomTactic()">Save</button>
+<button class="btn" onclick="deleteCustomTactic()" style="color: #ff8a8a;">Delete</button>
+<button class="btn" onclick="setTool('draw', 'black')">Black Ink</button>
+<button class="btn" onclick="setTool('draw', '#e63946')">Red Ink</button>
+<button class="btn" onclick="clearCanvas()">Clear Lines</button>
+<button class="btn" onclick="resetBoard()">Reset Pitch</button>
+</div>
+
+<div id="field">
+<canvas id="drawLayer"></canvas>
+<div id="pieces-layer"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -49,7 +49,7 @@ window.onload = function() {
     resetBoard();
     loadSavedPlays();
 
-    window.addEventListener('resize', initCanvas);
+    window.addEventListener('resize', () => { initCanvas(); sizePieces(); });
 
     canvas.addEventListener('pointerdown', (e) => {
         if (!drawMode) return;
@@ -184,10 +184,11 @@ function createPiece(num, color, x, y) {
         e.preventDefault();
         p.style.transition = 'none';
         p.setPointerCapture(e.pointerId);
+        const half = p.offsetWidth / 2;
         p.onpointermove = (ev) => {
             const rect = field.getBoundingClientRect();
-            p.style.left = (ev.clientX - rect.left - 17) + 'px';
-            p.style.top = (ev.clientY - rect.top - 17) + 'px';
+            p.style.left = (ev.clientX - rect.left - half) + 'px';
+            p.style.top = (ev.clientY - rect.top - half) + 'px';
         };
         p.onpointerup = () => {
             p.onpointermove = null;
@@ -210,6 +211,22 @@ function resetBoard() {
         blueTeam[i] = createPiece(i, 'blue', w - 55, 20 + (i * 40));
     }
     createPiece('ball', 'ball', w / 2, h / 2);
+    sizePieces();
+}
+
+/* Player pieces sized the same way as Chalk Talk's baseball/hockey boards
+   (~4% of field width, 14px floor) instead of the old fixed 34px. */
+function sizePieces() {
+    const size = Math.max(14, field.clientWidth * 0.04);
+    const font = Math.max(6, size * 0.32);
+    for (let i = 1; i <= 11; i++) {
+        [redTeam[i], blueTeam[i]].forEach(el => {
+            if (!el) return;
+            el.style.width = size + 'px';
+            el.style.height = size + 'px';
+            el.style.fontSize = font + 'px';
+        });
+    }
 }
 
 function togglePhase() {
